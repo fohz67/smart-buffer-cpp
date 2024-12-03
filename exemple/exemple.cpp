@@ -1,4 +1,4 @@
-#include "SmartBuffer.hpp"
+#include "../include/SmartBuffer.hpp"
 #include <iostream>
 
 int main() {

@@ -5,7 +5,7 @@
 ** DESCRIPTION: Implementation of the SmartBuffer class for managing dynamic binary data buffers.
 */
 
-#include "SmartBuffer.hpp"
+#include "../include/SmartBuffer.hpp"
 
 SmartBuffer::SmartBuffer(size_t initialCapacity)
         : buffer(initialCapacity, 0), readOffset(0), writeOffset(0) {}
