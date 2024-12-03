@@ -36,7 +36,7 @@ inline void SmartBuffer::ensureCapacity(size_t additionalSize)
  * If T is trivially copyable, the value is inserted into the buffer using std::copy.
  * For non-trivial types like std::string, a specialization is provided.
  */
-*/ template <typename T> inline void SmartBuffer::write(const T &value)
+template <typename T> inline void SmartBuffer::write(const T &value)
 {
     if constexpr (std::is_trivially_copyable_v<T>)
     {
