@@ -1,130 +1,101 @@
-#ifndef SMARTBUFFER_HPP
-#define SMARTBUFFER_HPP
+#pragma once
 
-#include <vector>
-#include <string>
 #include <cstdint>
 #include <stdexcept>
-#include <cstring>
+#include <string>
+#include <type_traits>
+#include <vector>
+
+/**
+ * @file SmartBuffer.hpp
+ * @brief Declaration of the SmartBuffer class.
+ */
 
 /**
  * @class SmartBuffer
- * @brief A dynamic buffer class for efficient reading and writing of binary data.
+ * @brief A class for managing a dynamic binary data buffer.
+ *
+ * The SmartBuffer class allows for easy serialization and deserialization of various data types
+ * into a dynamic buffer. It supports reading and writing of trivially copyable types and provides
+ * specializations for non-trivial types like std::string.
  */
-class SmartBuffer {
-public:
+class SmartBuffer
+{
+  public:
     /**
-     * @brief Constructs a SmartBuffer with an initial capacity.
-     * @param initialCapacity Initial capacity of the buffer in bytes.
+     * @brief Constructs a SmartBuffer with an optional initial capacity.
+     * @param initialCapacity The initial capacity to reserve in the buffer.
      */
-    explicit SmartBuffer(size_t initialCapacity = 256);
+    SmartBuffer(size_t initialCapacity = 8);
 
     /**
-     * @brief Writes a single byte to the buffer.
-     * @param value The byte value to write.
+     * @brief Writes a value of type T into the buffer.
+     * @tparam T The type of the value to write.
+     * @param value The value to write.
+     *
+     * Supports trivially copyable types. For non-trivial types like std::string, there are
+     * specializations provided.
      */
-    void writeInt8(int8_t value);
+    template <typename T> void write(const T &value);
 
     /**
-     * @brief Writes a 16-bit integer to the buffer.
-     * @param value The 16-bit integer to write.
+     * @brief Reads a value of type T from the buffer.
+     * @tparam T The type of the value to read.
+     * @return The value read from the buffer.
+     *
+     * Supports trivially copyable types. For non-trivial types like std::string, there are
+     * specializations provided.
      */
-    void writeInt16(int16_t value);
+    template <typename T> T read();
 
     /**
-     * @brief Writes a 32-bit integer to the buffer.
-     * @param value The 32-bit integer to write.
+     * @brief Overloads the << operator to write data into the buffer.
+     * @tparam T The type of data to write.
+     * @param value The data to write.
+     * @return Reference to the current instance of SmartBuffer.
      */
-    void writeInt32(int32_t value);
+    template <typename T> SmartBuffer &operator<<(const T &value);
 
     /**
-     * @brief Writes a floating-point number to the buffer.
-     * @param value The float value to write.
+     * @brief Overloads the >> operator to read data from the buffer.
+     * @tparam T The type of data to read.
+     * @param value Reference to store the read data.
+     * @return Reference to the current instance of SmartBuffer.
      */
-    void writeFloat(float value);
+    template <typename T> SmartBuffer &operator>>(T &value);
 
     /**
-     * @brief Writes a string to the buffer.
-     * @param value The string to write.
-     */
-    void writeString(const std::string& value);
-
-    /**
-     * @brief Writes raw bytes to the buffer.
-     * @param data Pointer to the data to write.
-     * @param size Number of bytes to write.
-     */
-    void writeBytes(const uint8_t* data, size_t size);
-
-    /**
-     * @brief Reads a single byte from the buffer.
-     * @return The read byte.
-     */
-    int8_t readInt8();
-
-    /**
-     * @brief Reads a 16-bit integer from the buffer.
-     * @return The read 16-bit integer.
-     */
-    int16_t readInt16();
-
-    /**
-     * @brief Reads a 32-bit integer from the buffer.
-     * @return The read 32-bit integer.
-     */
-    int32_t readInt32();
-
-    /**
-     * @brief Reads a floating-point number from the buffer.
-     * @return The read float value.
-     */
-    float readFloat();
-
-    /**
-     * @brief Reads a string from the buffer.
-     * @return The read string.
-     */
-    std::string readString();
-
-    /**
-     * @brief Reads raw bytes from the buffer into a destination array.
-     * @param dest Pointer to the destination buffer.
-     * @param size Number of bytes to read.
-     */
-    void readBytes(uint8_t* dest, size_t size);
-
-    /**
-     * @brief Resets the buffer for both reading and writing.
+     * @brief Resets the buffer by clearing all data.
      */
     void reset();
 
     /**
-     * @brief Resets the read offset of the buffer.
+     * @brief Resets the read offset to the beginning of the buffer.
      */
     void resetRead();
 
     /**
-     * @brief Returns the current size of the written data in the buffer.
-     * @return Size of the written data in bytes.
+     * @brief Gets the size of the written data in the buffer.
+     * @return The size in bytes of the data.
      */
     size_t getSize() const;
 
     /**
-     * @brief Returns a pointer to the raw buffer data.
-     * @return Pointer to the buffer data.
+     * @brief Gets a pointer to the buffer's data.
+     * @return Constant pointer to the buffer's data.
      */
-    const uint8_t* getBuffer() const;
+    const uint8_t *getBuffer() const;
 
-private:
-    std::vector<uint8_t> buffer;     ///< The dynamic buffer storage.
-    size_t readOffset;               ///< The current read position in the buffer.
-    size_t writeOffset;              ///< The current write position in the buffer.
-
+  private:
     /**
-     * @brief Ensures the buffer has enough capacity for additional writes.
-     * @param additionalSize The number of additional bytes required.
+     * @brief Ensures the buffer has enough capacity for additional data.
+     * @param additionalSize The required additional size.
      */
     void ensureCapacity(size_t additionalSize);
+
+    std::vector<uint8_t> buffer; /**< Underlying byte buffer. */
+    size_t readOffset;           /**< Current read offset in the buffer. */
+    size_t writeOffset;          /**< Current write offset in the buffer. */
 };
 
-#endif // SMARTBUFFER_HPP
+#include "SmartBuffer.inl"
