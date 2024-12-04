@@ -29,24 +29,11 @@ class SmartBuffer
     SmartBuffer(size_t initialCapacity = 8);
 
     /**
-     * @brief Writes a value of type T into the buffer.
-     * @tparam T The type of the value to write.
-     * @param value The value to write.
-     *
-     * Supports trivially copyable types. For non-trivial types like std::string, there are
-     * specializations provided.
+     * @brief Injects raw data directly into the buffer.
+     * @param rawData Pointer to the raw data to inject.
+     * @param size The size of the raw data in bytes.
      */
-    template <typename T> void write(const T &value);
-
-    /**
-     * @brief Reads a value of type T from the buffer.
-     * @tparam T The type of the value to read.
-     * @return The value read from the buffer.
-     *
-     * Supports trivially copyable types. For non-trivial types like std::string, there are
-     * specializations provided.
-     */
-    template <typename T> T read();
+    void inject(const uint8_t *rawData, size_t size);
 
     /**
      * @brief Overloads the << operator to write data into the buffer.
