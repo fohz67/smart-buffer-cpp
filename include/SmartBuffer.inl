@@ -29,6 +29,18 @@ inline void SmartBuffer::ensureCapacity(size_t additionalSize)
 }
 
 /**
+ * @brief Injects raw data directly into the buffer.
+ * @param rawData Pointer to the raw data to inject.
+ * @param size The size of the raw data in bytes.
+ */
+inline void SmartBuffer::inject(const uint8_t *rawData, size_t size)
+{
+    ensureCapacity(size);
+    std::memcpy(buffer.data() + writeOffset, rawData, size);
+    writeOffset += size;
+}
+
+/**
  * @brief Writes a value of type T into the buffer.
  * @tparam T The type of the value to write.
  * @param value The value to write.
@@ -40,7 +52,7 @@ template <typename T> inline void SmartBuffer::write(const T &value)
 {
     if constexpr (std::is_trivially_copyable_v<T>)
     {
-        ensureCapacity(sizeof(T));
+        buffer.resize(buffer.size() + sizeof(T));
         std::memcpy(buffer.data() + writeOffset, &value, sizeof(T));
         writeOffset += sizeof(T);
     }
