@@ -1,5 +1,5 @@
-#include "SmartBuffer.hpp"
 #include <iostream>
+#include "SmartBuffer.hpp"
 
 int main() {
     SmartBuffer buffer;

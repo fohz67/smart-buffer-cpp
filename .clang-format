@@ -1,14 +1,44 @@
-# .clang-format
-BasedOnStyle: LLVM
+---
+Language: Cpp
+
 IndentWidth: 4
 TabWidth: 4
 UseTab: Never
-ColumnLimit: 100
-BreakBeforeBraces: Allman
+
+BraceWrapping:
+  AfterClass: true
+  AfterControlStatement: true
+  AfterEnum: true
+  AfterFunction: true
+  AfterNamespace: true
+  AfterStruct: true
+  SplitEmptyFunction: true
+  SplitEmptyRecord: true
+  SplitEmptyNamespace: true
+
+ColumnLimit: 80
+BreakBeforeBraces: Attach
+AllowShortFunctionsOnASingleLine: Empty
 AllowShortIfStatementsOnASingleLine: false
 AllowShortLoopsOnASingleLine: false
-AllowShortFunctionsOnASingleLine: InlineOnly
-SpacesBeforeTrailingComments: 2
+
+AlignAfterOpenBracket: Align
+AlignOperands: Align
+AlignEscapedNewlines: Right
+AlignArrayOfStructures: None
+
 SpaceBeforeParens: ControlStatements
-Cpp11BracedListStyle: true
-IndentCaseLabels: false
+SpacesInParentheses: false
+SpacesInSquareBrackets: false
+PointerAlignment: Left
+
+AccessModifierOffset: -2
+
+SortIncludes: true
+IncludeBlocks: Preserve
+
+IncludeCategories:
+  - Regex: '^<.*>$'
+    Priority: 1
+  - Regex: '^".*"$'
+    Priority: 2
