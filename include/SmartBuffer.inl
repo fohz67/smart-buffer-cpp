@@ -52,9 +52,7 @@ template <typename T> inline void SmartBuffer::write(const T &value)
 {
     if constexpr (std::is_trivially_copyable_v<T>)
     {
-        buffer.resize(buffer.size() + sizeof(T));
-        std::memcpy(buffer.data() + writeOffset, &value, sizeof(T));
-        writeOffset += sizeof(T);
+        ensureCapacity(sizeof(T));
     }
     else
     {
