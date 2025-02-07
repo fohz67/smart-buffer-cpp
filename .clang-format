@@ -1,104 +1,41 @@
 ---
-# Base style and language standard
-BasedOnStyle: LLVM
-Language: Cpp
+# Fichier de configuration clang-format pour projets C++
+# Ce fichier uniformise le formatage de votre code et peut être placé à la racine de chacun de vos projets.
+# Basé sur le style Google avec quelques ajustements personnels.
 
-#----------------------------------------------------------------------
-# Indentation, column width, and basic spacing
-#----------------------------------------------------------------------
-IndentWidth: 4
-TabWidth: 4
-UseTab: Never
-ColumnLimit: 100
+# Définition du langage
+Language:        Cpp
+BasedOnStyle:    Google
 
-SpacesInParentheses: false
-SpacesInSquareBrackets: false
-SpaceBeforeParens: ControlStatements
-SpaceBeforeAssignmentOperators: true
+# Indentation et tabulations
+IndentWidth:     4         # Utilise 4 espaces pour l'indentation.
+TabWidth:        4         # Largeur d'une tabulation.
+UseTab:          Never     # Utilise toujours des espaces (évite les tabulations).
 
-#----------------------------------------------------------------------
-# Brace wrapping
-#----------------------------------------------------------------------
-BreakBeforeBraces: Attach
-BraceWrapping:
-    AfterClass:          true
-    AfterControlStatement: true
-    AfterEnum:           true
-    AfterFunction:       true
-    AfterNamespace:      true
-    AfterStruct:         true
-    AfterUnion:          true
-    SplitEmptyFunction:  true
-    SplitEmptyRecord:    true
-    SplitEmptyNamespace: true
+# Limite de colonnes
+ColumnLimit:     100       # Limite le nombre de caractères par ligne à 100.
 
-#----------------------------------------------------------------------
-# Function and control statement formatting
-#----------------------------------------------------------------------
-AllowShortFunctionsOnASingleLine: Empty
-AllowShortIfStatementsOnASingleLine: false
-AllowShortLoopsOnASingleLine: false
+# Formatage des accolades
+BreakBeforeBraces: Allman   # Place l'accolade ouvrante sur une nouvelle ligne.
 
-#----------------------------------------------------------------------
-# Alignment settings for better readability
-#----------------------------------------------------------------------
-AlignAfterOpenBracket: Align
-AlignOperands:         Align
-AlignEscapedNewlines:  Right
-AlignConsecutiveAssignments:  true
-AlignConsecutiveDeclarations: true
-AlignConsecutiveMacros:       true
-AlignTrailingComments:        true
-
-#----------------------------------------------------------------------
-# Pointers, references, and access modifiers
-#----------------------------------------------------------------------
-PointerAlignment: Left
-AccessModifierOffset: -2
-
-#----------------------------------------------------------------------
-# Include sorting and namespace comments
-#----------------------------------------------------------------------
-SortIncludes: true
-IncludeBlocks: Preserve
-IncludeCategories:
-    - Regex: "^<.*>$"
-      Priority: 1
-    - Regex: '^".*"$'
-      Priority: 2
-FixNamespaceComments: true
-
-#----------------------------------------------------------------------
-# Operator wrapping and binary expressions
-#----------------------------------------------------------------------
-BreakBeforeBinaryOperators: None
-BreakBeforeTernaryOperators: true
-
-#----------------------------------------------------------------------
-# C++11 braced list style and initializer formatting
-#----------------------------------------------------------------------
-Cpp11BracedListStyle: true
-PackConstructorInitializers: NextLine
-
-#----------------------------------------------------------------------
-# Bin packing and penalty adjustments for fine tuning
-#----------------------------------------------------------------------
+# Alignement des pointeurs et références
 DerivePointerAlignment: false
-ExperimentalAutoDetectBinPacking: false
-BinPackArguments: false
-BinPackParameters: false
+PointerAlignment: Left      # Aligne les pointeurs à gauche (ex. int* ptr).
 
-PenaltyBreakAssignment: 2
-PenaltyBreakBeforeFirstCallParameter: 0
-PenaltyBreakString: 2
-PenaltyExcessCharacter: 100
-PenaltyReturnTypeOnItsOwnLine: 60
+# Gestion des espaces et parenthèses
+SpaceBeforeParens: ControlStatements  # Ajoute un espace avant la parenthèse dans les structures de contrôle (if, for, while, etc.).
+SpacesInParentheses: false             # Aucun espace à l'intérieur des parenthèses.
+SpacesInAngles:    false               # Aucun espace à l'intérieur des chevrons (< >).
 
-#----------------------------------------------------------------------
-# Miscellaneous options
-#----------------------------------------------------------------------
-KeepEmptyLinesAtTheStartOfBlocks: true
-MaxEmptyLinesToKeep: 2
-ReflowComments: true
-SortUsingDeclarations: true
-UseCRLF: false
+# Paramètres de fonctions et appels
+AllowAllParametersOfDeclarationOnNextLine: false
+BinPackParameters: false   # N'essaie pas de regrouper plusieurs paramètres sur une seule ligne.
+BinPackArguments: false    # N'essaie pas de regrouper plusieurs arguments sur une seule ligne.
+
+# Formatage des initialisateurs de constructeur
+BreakConstructorInitializers: BeforeColon  # Place la liste d'initialisation sur une nouvelle ligne.
+ConstructorInitializerIndentWidth: 4         # Indente la liste d'initialisation avec 4 espaces.
+
+# Autres options de formatage
+IndentCaseLabels:  true              # Indente les labels des cas dans les instructions switch.
+BreakBeforeTernaryOperators: true     # Force le retour à la ligne avant l'opérateur ternaire.

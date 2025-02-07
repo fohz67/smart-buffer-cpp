@@ -1,3 +1,8 @@
+/**
+ * @file SmartBuffer.hpp
+ * @brief Declaration of the SmartBuffer class.
+ */
+
 #pragma once
 
 #include <cstdint>
@@ -5,11 +10,6 @@
 #include <string>
 #include <type_traits>
 #include <vector>
-
-/**
- * @file SmartBuffer.hpp
- * @brief Declaration of the SmartBuffer class.
- */
 
 /**
  * @class SmartBuffer
@@ -20,8 +20,9 @@
  * trivially copyable types and provides specializations for non-trivial types
  * like std::string.
  */
-class SmartBuffer {
-  public:
+class SmartBuffer
+{
+   public:
     /**
      * @brief Constructs a SmartBuffer with an optional initial capacity.
      * @param initialCapacity The initial capacity to reserve in the buffer.
@@ -43,7 +44,8 @@ class SmartBuffer {
      * Supports trivially copyable types. For non-trivial types like
      * std::string, there are specializations provided.
      */
-    template <typename T> void write(const T& value);
+    template <typename T>
+    void write(const T& value);
 
     /**
      * @brief Reads a value of type T from the buffer.
@@ -53,7 +55,8 @@ class SmartBuffer {
      * Supports trivially copyable types. For non-trivial types like
      * std::string, there are specializations provided.
      */
-    template <typename T> T read();
+    template <typename T>
+    T read();
 
     /**
      * @brief Overloads the << operator to write data into the buffer.
@@ -61,7 +64,8 @@ class SmartBuffer {
      * @param value The data to write.
      * @return Reference to the current instance of SmartBuffer.
      */
-    template <typename T> SmartBuffer& operator<<(const T& value);
+    template <typename T>
+    SmartBuffer& operator<<(const T& value);
 
     /**
      * @brief Overloads the >> operator to read data from the buffer.
@@ -69,7 +73,8 @@ class SmartBuffer {
      * @param value Reference to store the read data.
      * @return Reference to the current instance of SmartBuffer.
      */
-    template <typename T> SmartBuffer& operator>>(T& value);
+    template <typename T>
+    SmartBuffer& operator>>(T& value);
 
     /**
      * @brief Resets the buffer by clearing all data.
@@ -93,16 +98,16 @@ class SmartBuffer {
      */
     [[nodiscard]] const uint8_t* getBuffer() const;
 
-  private:
+   private:
     /**
      * @brief Ensures the buffer has enough capacity for additional data.
      * @param additionalSize The required additional size.
      */
     void ensureCapacity(size_t additionalSize);
 
-    std::vector<uint8_t> buffer;          /**< Underlying byte buffer. */
-    size_t               readOffset  = 0; /**< Current read offset in the buffer. */
-    size_t               writeOffset = 0; /**< Current write offset in the buffer. */
+    std::vector<uint8_t> buffer;  // The buffer to store the data.
+    size_t readOffset = 0;        // Current read offset in the buffer.
+    size_t writeOffset = 0;       // Current write offset in the buffer.
 };
 
 #include "SmartBuffer.inl"
