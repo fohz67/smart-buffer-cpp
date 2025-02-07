@@ -1,6 +1,3 @@
-#include <cstdint>
-#include <iostream>
-
 #include "../include/SmartBuffer.hpp"
 
 int main()
