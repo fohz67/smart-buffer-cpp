@@ -144,16 +144,25 @@ inline void SmartBuffer::reset()
 /**
  * @brief Resets the read offset to the beginning of the buffer.
  */
-inline void SmartBuffer::resetRead() { readOffset = 0; }
+inline void SmartBuffer::resetRead()
+{
+    readOffset = 0;
+}
 
 /**
  * @brief Gets the size of the written data in the buffer.
  * @return The size in bytes of the data.
  */
-inline size_t SmartBuffer::getSize() const { return writeOffset; }
+inline size_t SmartBuffer::getSize() const
+{
+    return writeOffset;
+}
 
 /**
  * @brief Gets a pointer to the buffer's data.
  * @return Constant pointer to the buffer's data.
  */
-inline const uint8_t* SmartBuffer::getBuffer() const { return buffer.data(); }
+inline const uint8_t* SmartBuffer::getBuffer() const
+{
+    return buffer.data();
+}

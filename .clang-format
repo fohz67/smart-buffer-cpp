@@ -1,27 +1,20 @@
 Language: Cpp
 BasedOnStyle: Google
-
 IndentWidth: 4
 TabWidth: 4
 UseTab: Never
-
 ColumnLimit: 100
-
 BreakBeforeBraces: Allman
-
 DerivePointerAlignment: false
 PointerAlignment: Left
-
 SpaceBeforeParens: ControlStatements
 SpacesInParentheses: false
 SpacesInAngles: false
-
 AllowAllParametersOfDeclarationOnNextLine: false
+AllowShortFunctionsOnASingleLine: None
 BinPackParameters: false
 BinPackArguments: false
-
 BreakConstructorInitializers: BeforeColon
 ConstructorInitializerIndentWidth: 4
-
 IndentCaseLabels: true
 BreakBeforeTernaryOperators: true
