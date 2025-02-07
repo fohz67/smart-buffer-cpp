@@ -1,41 +1,27 @@
----
-# Fichier de configuration clang-format pour projets C++
-# Ce fichier uniformise le formatage de votre code et peut être placé à la racine de chacun de vos projets.
-# Basé sur le style Google avec quelques ajustements personnels.
+Language: Cpp
+BasedOnStyle: Google
 
-# Définition du langage
-Language:        Cpp
-BasedOnStyle:    Google
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never
 
-# Indentation et tabulations
-IndentWidth:     4         # Utilise 4 espaces pour l'indentation.
-TabWidth:        4         # Largeur d'une tabulation.
-UseTab:          Never     # Utilise toujours des espaces (évite les tabulations).
+ColumnLimit: 100
 
-# Limite de colonnes
-ColumnLimit:     100       # Limite le nombre de caractères par ligne à 100.
+BreakBeforeBraces: Allman
 
-# Formatage des accolades
-BreakBeforeBraces: Allman   # Place l'accolade ouvrante sur une nouvelle ligne.
-
-# Alignement des pointeurs et références
 DerivePointerAlignment: false
-PointerAlignment: Left      # Aligne les pointeurs à gauche (ex. int* ptr).
+PointerAlignment: Left
 
-# Gestion des espaces et parenthèses
-SpaceBeforeParens: ControlStatements  # Ajoute un espace avant la parenthèse dans les structures de contrôle (if, for, while, etc.).
-SpacesInParentheses: false             # Aucun espace à l'intérieur des parenthèses.
-SpacesInAngles:    false               # Aucun espace à l'intérieur des chevrons (< >).
+SpaceBeforeParens: ControlStatements
+SpacesInParentheses: false
+SpacesInAngles: false
 
-# Paramètres de fonctions et appels
 AllowAllParametersOfDeclarationOnNextLine: false
-BinPackParameters: false   # N'essaie pas de regrouper plusieurs paramètres sur une seule ligne.
-BinPackArguments: false    # N'essaie pas de regrouper plusieurs arguments sur une seule ligne.
+BinPackParameters: false
+BinPackArguments: false
 
-# Formatage des initialisateurs de constructeur
-BreakConstructorInitializers: BeforeColon  # Place la liste d'initialisation sur une nouvelle ligne.
-ConstructorInitializerIndentWidth: 4         # Indente la liste d'initialisation avec 4 espaces.
+BreakConstructorInitializers: BeforeColon
+ConstructorInitializerIndentWidth: 4
 
-# Autres options de formatage
-IndentCaseLabels:  true              # Indente les labels des cas dans les instructions switch.
-BreakBeforeTernaryOperators: true     # Force le retour à la ligne avant l'opérateur ternaire.
+IndentCaseLabels: true
+BreakBeforeTernaryOperators: true
