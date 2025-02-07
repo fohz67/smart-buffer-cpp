@@ -8,7 +8,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 include_directories(${CMAKE_SOURCE_DIR}/include)
 
-add_library(smart_buffer STATIC src/main.cpp)
+add_library(smart_buffer STATIC src/SmartBuffer.cpp)
 
 set_target_properties(smart_buffer PROPERTIES
         CXX_STANDARD 20
