@@ -1,7 +1,7 @@
 #include <cstdint>
 #include <iostream>
 
-#include "SmartBuffer.hpp"
+#include "../include/SmartBuffer.hpp"
 
 int main()
 {

@@ -6,21 +6,9 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-file(GLOB_RECURSE SOURCES
-        "${CMAKE_SOURCE_DIR}/src/*.cpp"
-        "${CMAKE_SOURCE_DIR}/src/*.hpp"
-)
+include_directories(${CMAKE_SOURCE_DIR}/include)
 
-file(GLOB_RECURSE HEADERS
-        "${CMAKE_SOURCE_DIR}/include/*.hpp"
-)
-
-include_directories(
-        ${CMAKE_SOURCE_DIR}/include
-        ${CMAKE_SOURCE_DIR}/src
-)
-
-add_library(smart_buffer STATIC ${SOURCES})
+add_library(smart_buffer STATIC src/main.cpp)
 
 set_target_properties(smart_buffer PROPERTIES
         CXX_STANDARD 20
@@ -34,4 +22,4 @@ install(TARGETS smart_buffer
         RUNTIME DESTINATION bin
 )
 
-install(FILES ${HEADERS} DESTINATION include)
+install(DIRECTORY include/ DESTINATION include FILES_MATCHING PATTERN "*.hpp")
