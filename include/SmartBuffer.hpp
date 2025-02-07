@@ -100,9 +100,9 @@ class SmartBuffer {
      */
     void ensureCapacity(size_t additionalSize);
 
-    std::vector<uint8_t> buffer; /**< Underlying byte buffer. */
-    size_t readOffset = 0;       /**< Current read offset in the buffer. */
-    size_t writeOffset = 0;      /**< Current write offset in the buffer. */
+    std::vector<uint8_t> buffer;          /**< Underlying byte buffer. */
+    size_t               readOffset  = 0; /**< Current read offset in the buffer. */
+    size_t               writeOffset = 0; /**< Current write offset in the buffer. */
 };
 
 #include "SmartBuffer.inl"

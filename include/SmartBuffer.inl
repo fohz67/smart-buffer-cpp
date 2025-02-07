@@ -56,8 +56,6 @@ template <typename T> inline void SmartBuffer::write(const T& value) {
         ensureCapacity(length);
         std::memcpy(buffer.data() + writeOffset, value.data(), length);
         writeOffset += length;
-    } else {
-        static_assert(false, "Unsupported non-trivial type");
     }
 }
 
@@ -80,12 +78,9 @@ template <typename T> inline T SmartBuffer::read() {
         if (readOffset + length > writeOffset) {
             throw std::runtime_error("Buffer underflow");
         }
-        std::string value(buffer.begin() + readOffset,
-                          buffer.begin() + readOffset + length);
+        std::string value(buffer.begin() + readOffset, buffer.begin() + readOffset + length);
         readOffset += length;
         return value;
-    } else {
-        static_assert(false, "Unsupported non-trivial type");
     }
 }
 
@@ -95,8 +90,7 @@ template <typename T> inline T SmartBuffer::read() {
  * @param value The data to write.
  * @return Reference to the current instance of SmartBuffer.
  */
-template <typename T>
-inline SmartBuffer& SmartBuffer::operator<<(const T& value) {
+template <typename T> inline SmartBuffer& SmartBuffer::operator<<(const T& value) {
     write(value);
     return *this;
 }
@@ -118,7 +112,7 @@ template <typename T> inline SmartBuffer& SmartBuffer::operator>>(T& value) {
 inline void SmartBuffer::reset() {
     buffer.clear();
     buffer.shrink_to_fit();
-    readOffset = 0;
+    readOffset  = 0;
     writeOffset = 0;
 }
 

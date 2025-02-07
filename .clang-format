@@ -1,44 +1,104 @@
 ---
+# Base style and language standard
+BasedOnStyle: LLVM
 Language: Cpp
 
+#----------------------------------------------------------------------
+# Indentation, column width, and basic spacing
+#----------------------------------------------------------------------
 IndentWidth: 4
 TabWidth: 4
 UseTab: Never
+ColumnLimit: 100
 
-BraceWrapping:
-  AfterClass: true
-  AfterControlStatement: true
-  AfterEnum: true
-  AfterFunction: true
-  AfterNamespace: true
-  AfterStruct: true
-  SplitEmptyFunction: true
-  SplitEmptyRecord: true
-  SplitEmptyNamespace: true
+SpacesInParentheses: false
+SpacesInSquareBrackets: false
+SpaceBeforeParens: ControlStatements
+SpaceBeforeAssignmentOperators: true
 
-ColumnLimit: 80
+#----------------------------------------------------------------------
+# Brace wrapping
+#----------------------------------------------------------------------
 BreakBeforeBraces: Attach
+BraceWrapping:
+    AfterClass:          true
+    AfterControlStatement: true
+    AfterEnum:           true
+    AfterFunction:       true
+    AfterNamespace:      true
+    AfterStruct:         true
+    AfterUnion:          true
+    SplitEmptyFunction:  true
+    SplitEmptyRecord:    true
+    SplitEmptyNamespace: true
+
+#----------------------------------------------------------------------
+# Function and control statement formatting
+#----------------------------------------------------------------------
 AllowShortFunctionsOnASingleLine: Empty
 AllowShortIfStatementsOnASingleLine: false
 AllowShortLoopsOnASingleLine: false
 
+#----------------------------------------------------------------------
+# Alignment settings for better readability
+#----------------------------------------------------------------------
 AlignAfterOpenBracket: Align
-AlignOperands: Align
-AlignEscapedNewlines: Right
-AlignArrayOfStructures: None
+AlignOperands:         Align
+AlignEscapedNewlines:  Right
+AlignConsecutiveAssignments:  true
+AlignConsecutiveDeclarations: true
+AlignConsecutiveMacros:       true
+AlignTrailingComments:        true
 
-SpaceBeforeParens: ControlStatements
-SpacesInParentheses: false
-SpacesInSquareBrackets: false
+#----------------------------------------------------------------------
+# Pointers, references, and access modifiers
+#----------------------------------------------------------------------
 PointerAlignment: Left
-
 AccessModifierOffset: -2
 
+#----------------------------------------------------------------------
+# Include sorting and namespace comments
+#----------------------------------------------------------------------
 SortIncludes: true
 IncludeBlocks: Preserve
-
 IncludeCategories:
-  - Regex: '^<.*>$'
-    Priority: 1
-  - Regex: '^".*"$'
-    Priority: 2
+    - Regex: "^<.*>$"
+      Priority: 1
+    - Regex: '^".*"$'
+      Priority: 2
+FixNamespaceComments: true
+
+#----------------------------------------------------------------------
+# Operator wrapping and binary expressions
+#----------------------------------------------------------------------
+BreakBeforeBinaryOperators: None
+BreakBeforeTernaryOperators: true
+
+#----------------------------------------------------------------------
+# C++11 braced list style and initializer formatting
+#----------------------------------------------------------------------
+Cpp11BracedListStyle: true
+PackConstructorInitializers: NextLine
+
+#----------------------------------------------------------------------
+# Bin packing and penalty adjustments for fine tuning
+#----------------------------------------------------------------------
+DerivePointerAlignment: false
+ExperimentalAutoDetectBinPacking: false
+BinPackArguments: false
+BinPackParameters: false
+
+PenaltyBreakAssignment: 2
+PenaltyBreakBeforeFirstCallParameter: 0
+PenaltyBreakString: 2
+PenaltyExcessCharacter: 100
+PenaltyReturnTypeOnItsOwnLine: 60
+
+#----------------------------------------------------------------------
+# Miscellaneous options
+#----------------------------------------------------------------------
+KeepEmptyLinesAtTheStartOfBlocks: true
+MaxEmptyLinesToKeep: 2
+ReflowComments: true
+SortUsingDeclarations: true
+UseCRLF: false

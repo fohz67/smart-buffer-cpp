@@ -1,31 +1,33 @@
+#include <cstdint>
 #include <iostream>
 #include "SmartBuffer.hpp"
 
 int main() {
     SmartBuffer buffer;
 
-    // Writing data into the buffer
-    buffer << int8_t(127) << int16_t(32000) << int32_t(2147483647);
-    buffer << float(3.14f) << std::string("Fohz fOhZ FoHz");
+    buffer << uint8_t(255) << uint16_t(65535) << uint32_t(4294967295) << int32_t(-42)
+           << double(3.14159) << std::string("Hello");
 
-    // Reset the read offset to read from the beginning
+    std::cout << "Buffer size after writing: " << buffer.getSize() << " bytes\n\n";
+
     buffer.resetRead();
 
-    // Reading data from the buffer
-    int8_t a;
-    int16_t b;
-    int32_t c;
-    float d;
-    std::string e;
+    uint8_t     byte_val;
+    uint16_t    short_val;
+    uint32_t    uint_val;
+    int32_t     int_val;
+    double      double_val;
+    std::string str_val;
 
-    buffer >> a >> b >> c >> d >> e;
+    buffer >> byte_val >> short_val >> uint_val >> int_val >> double_val >> str_val;
 
-    // Displaying the read values
-    std::cout << "a = " << static_cast<int>(a) << std::endl;
-    std::cout << "b = " << b << std::endl;
-    std::cout << "c = " << c << std::endl;
-    std::cout << "d = " << d << std::endl;
-    std::cout << "e = " << e << std::endl;
+    std::cout << "Read values:\n";
+    std::cout << "Byte value: " << static_cast<int>(byte_val) << "\n";
+    std::cout << "Short value: " << short_val << "\n";
+    std::cout << "Unsigned int value: " << uint_val << "\n";
+    std::cout << "Signed int value: " << int_val << "\n";
+    std::cout << "Double value: " << double_val << "\n";
+    std::cout << "String value: " << str_val << "\n";
 
     return 0;
 }
